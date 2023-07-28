@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { } from 'react-native';
 import { IconSearch, IconTrash } from './src/assets/images';
 import IconImage from './src/theme/Layouts/IconImage';
 import Api from './src/services/Api';
+import * as S from './styles';
 
 function App() {
   const [cep, setCep] = useState('');
@@ -13,7 +14,6 @@ function App() {
 
   async function buscarCep() {
     if(cep == '') {
-      Alert.alert('Cep inválido!');
       setCep('');
     }
 
@@ -37,179 +37,90 @@ function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerWrapper}>
-        <Text style={styles.headerTitle}>
+    <S.Container>
+      <S.HeaderWrapper>
+        <S.HeaderTitle>
           Buscador de CEP
-        </Text>
-      </View>
+        </S.HeaderTitle>
+      </S.HeaderWrapper>
 
-      <View style={styles.formRow}>
-        <View 
-        style={styles.fieldItem} 
-        style={{ width: '60%' }}>
-          <Text style={styles.label}>
+      <S.FormRow>
+        <S.FieldItem width={60}>
+          <S.Label>
             CEP:
-          </Text>
+          </S.Label>
 
-          <TextInput 
-            style={styles.fieldPattern}
+          <S.FieldPattern 
             placeholder="Ex: 12345-678"
             value={cep}
             onChangeText={(text) => setCep(text)} 
           />
-        </View>
+        </S.FieldItem>
 
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity 
-            style={styles.buttonSearch}
+        <S.ButtonWrapper>
+          <S.ButtonPattern 
+            backgroundColor={'#0088FF'}
             onPress={buscarCep}
           >
             <IconImage source={IconSearch} width={25} />
-          </TouchableOpacity>
+          </S.ButtonPattern>
 
-          <TouchableOpacity 
-            style={styles.buttonTrash}
+          <S.ButtonPattern 
+            backgroundColor={'#FF003D'}
             onPress={clearFields}
           >
             <IconImage source={IconTrash} width={25} />
-          </TouchableOpacity>
-        </View>
-      </View>
+          </S.ButtonPattern>
+        </S.ButtonWrapper>
+      </S.FormRow>
 
-      <View style={styles.formRow}>
-        <View style={styles.fieldItem}>
-          <Text style={styles.label}>
+      <S.FormRow>
+        <S.FieldItem>
+          <S.Label>
             Logradouro:
-          </Text>
+          </S.Label>
           
-          <TextInput 
-            style={styles.fieldPattern} 
-            placeholder="Ex: 12345-678" 
+          <S.FieldPattern
             value={logradouro}
             onChangeText={(text) => setLogradouro(text)}
           />
-        </View>
+        </S.FieldItem>
 
-        <View style={styles.fieldItem}>
-          <Text style={styles.label}>
+        <S.FieldItem>
+          <S.Label>
             Bairro:
-          </Text>
+          </S.Label>
           
-          <TextInput 
-            style={styles.fieldPattern}
+          <S.FieldPattern
             value={bairro}
             onChangeText={(text) => setBairro(text)} 
           />
-        </View>
+        </S.FieldItem>
 
-        <View style={styles.fieldItem} style={{ width: '70%' }}>
-          <Text style={styles.label}>
+        <S.FieldItem width={70}>
+          <S.Label>
             Cidade:
-          </Text>
+          </S.Label>
           
-          <TextInput 
-            style={styles.fieldPattern}
+          <S.FieldPattern 
             value={localidade}
             onChangeText={(text) => setLocalidade(text)} 
           />
-        </View>
+        </S.FieldItem>
 
-        <View style={styles.fieldItem} style={{ width: '25%' }}>
-          <Text style={styles.label}>
+        <S.FieldItem width={25}>
+          <S.Label>
             Estado:
-          </Text>
+          </S.Label>
           
-          <TextInput 
-            style={styles.fieldPattern} 
+          <S.FieldPattern 
             value={uf}
             onChangeText={(text) => setUf(text)}
           />
-        </View>
-      </View>
-    </View>
+        </S.FieldItem>
+      </S.FormRow>
+    </S.Container>
   );
 }
-
-const styles = StyleSheet.create({
-  headerWrapper: {
-    height: 80,
-    marginBottom: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#4C00FF'
-  },
-
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    color: '#FFF'
-  },
-
-  container: {
-    flex: 1,
-    backgroundColor: '#FCFCFC'
-  },
-
-  formRow: {
-    marginBottom: 16,
-    paddingHorizontal: 16,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-
-  fieldItem: {
-    width: '100%',
-    marginBottom: 16,
-  },
-
-  label: {
-    marginBottom: 8,
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#0A0A0A'
-  },
-
-  fieldPattern: {
-    height: 60,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: '#707070',
-    borderRadius: 10,
-    fontWeight: '500',
-    color: '#0A0A0A'
-  },
-
-  buttonWrapper: {
-    flex: 1,
-    paddingTop: 38,
-    paddingLeft: 2,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-end',
-  },
-
-  buttonSearch: {
-    flex: 1,
-    height: 60,
-    marginRight: 2,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0088FF'
-  },
-
-  buttonTrash: {
-    flex: 1,
-    height: 60,
-    marginRight: 2,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FF003D'
-  }
-});
 
 export default App;
